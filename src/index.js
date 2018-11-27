@@ -123,6 +123,7 @@ function drawHeatMap(incomingData) {
   rect.on("mouseenter", function(d) {
     d3.select("#tooltip")
       .style("opacity", 0.95)
+      .attr("data-year", d.year)
       .html(
         `<span>${d.year} - ${d.monthName}</span> <br />
          <span>${d.abs.toFixed(2)}℃</span> <br />
@@ -150,7 +151,7 @@ function drawHeatMap(incomingData) {
   const legend = svg
     .append("g")
     .attr("id", "legend")
-    .attr("transform", "translate(40, 520)");
+    .attr("transform", "translate(60, 520)");
 
   const legendGroups = legend
     .selectAll("g")
@@ -161,36 +162,16 @@ function drawHeatMap(incomingData) {
 
   legendGroups
     .append("rect")
-    .attr("width", 35)
+    .attr("width", 38)
     .attr("height", 35)
-    .style("fill", d => fillScale(d));
+    .style("fill", d => fillScale(d))
+    .style("stroke", "black")
+    .style("stroke-width", "1px");
 
   legendGroups
     .append("text")
     .attr("x", (d, i) => i)
-    .attr("y", 45)
-    .text(d => d);
-
-  // const rectLegend = legend
-  //   .selectAll("rect")
-  //   .data(thresholds)
-  //   .enter()
-  //   .append("rect")
-  //   .attr("x", (d, i) => i * 40)
-  //   .attr("y", 0)
-  //   .attr("width", "35px")
-  //   .attr("height", "35px")
-  //   .style("fill", d => fillScale(d))
-  //   .style("stroke", "black")
-  //   .style("stroke-width", "1px");
-
-  // legend
-  //   .selectAll("text")
-  //   .data(thresholds)
-  //   .enter()
-  //   .append("text")
-  //   .attr("class", "legendText")
-  //   .attr("x", (d, i) => i * 35)
-  //   .attr("y", 45)
-  //   .text(d => d);
+    .attr("y", 50)
+    .attr("dx", 15)
+    .text(d => (String(d).length < 2 ? String(d) + ".0" : String(d)));
 }

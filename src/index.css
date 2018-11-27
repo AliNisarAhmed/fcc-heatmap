@@ -12,10 +12,10 @@ body {
 
 h3 {
   margin-top: 0;
+  margin-bottom: 5px;
 }
 
 svg {
-  border: 1px solid tomato;
   width: 1700px;
   height: 600px;
 }
